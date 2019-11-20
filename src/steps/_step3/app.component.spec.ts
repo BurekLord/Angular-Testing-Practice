@@ -8,7 +8,7 @@ describe('METHOD: getWelcomingMessage', () => {
     let expectedValue;
 
     beforeEach(() => {
-        console.log('BEFORE PARENT')
+        console.log('BEFORE PARENT');
     });
 
     it('should return hello Bonnie', () => {
@@ -32,7 +32,7 @@ describe('METHOD: getWelcomingMessage', () => {
     describe('another sub use case', () => {
 
         beforeEach(() => {
-            console.log('BEFORE NESTED')
+            console.log('BEFORE NESTED');
         });
 
         it('should fail', () => {

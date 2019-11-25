@@ -1,7 +1,7 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
 
         plugins: [
@@ -21,13 +21,13 @@ module.exports = function(config) {
         restartOnFileChange: true,
 
         // BUILD
-        frameworks: [ 'jasmine', '@angular-devkit/build-angular' ],
+        frameworks: ['jasmine-given', 'jasmine', '@angular-devkit/build-angular'],
         basePath: '',
 
         // RUN
         port: 9876,
         // MILE: dont open the browser
-        browsers: [ 'ChromeHeadless' ],
+        browsers: ['ChromeHeadless'],
         // browsers: [ 'Chrome' ],
 
         // REPORT
@@ -36,7 +36,7 @@ module.exports = function(config) {
 
         // MILE: jasmine-diff goes before so that it will work properly
         // MILE: mocha is a prettier reporter then 'progress'
-        reporters: [ 'jasmine-diff', 'mocha' ],
+        reporters: ['jasmine-diff', 'mocha'],
         // reporters: ['progress', 'kjhtml'],
 
         // MILE: change the color of errors for jasmine-diff
@@ -56,7 +56,7 @@ module.exports = function(config) {
 
         coverageIstanbulReporter: {
             dir: require('path').join(__dirname, './coverage/llama-date'),
-            reports: [ 'html', 'lcovonly', 'text-summary' ],
+            reports: ['html', 'lcovonly', 'text-summary'],
             fixWebpackSourcePaths: true
         }
     });

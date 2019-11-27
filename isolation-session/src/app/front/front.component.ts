@@ -1,15 +1,23 @@
+import { FrontService } from './front.service';
+import { Llama } from './Llama.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-front',
-  templateUrl: './front.component.html',
-  styleUrls: ['./front.component.scss']
+    selector: 'app-front',
+    templateUrl: './front.component.html',
+    styleUrls: ['./front.component.scss']
 })
 export class FrontComponent implements OnInit {
 
-  constructor() { }
+    llamas: Llama[];
 
-  ngOnInit() {
-  }
+    constructor(private frontService: FrontService) { }
 
+    ngOnInit(): void {
+        this.llamas = this.frontService.getFeaturedLlamas();
+    }
+
+    isListVisible(): boolean {
+        return (this.llamas.length > 0);
+    }
 }

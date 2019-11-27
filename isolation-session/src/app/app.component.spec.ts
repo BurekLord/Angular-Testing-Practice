@@ -1,25 +1,47 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { TestBed } from '@angular/core/testing';
 
-describe('AppComponent', () => {
-    let component: AppComponent;
-    Given(async () => {
-        TestBed.configureTestingModule({
-            imports: [
-                RouterTestingModule
-            ],
-            providers: [
-                AppComponent
-            ],
-        });
-        component = TestBed.get(AppComponent);
+describe('METHOD: getWelcomingMessage', () => {
+
+  let actualValue, expectedValue;
+  let fakeUserName: string;
+  let componentUnderTest: AppComponent;
+
+  Given(() => {
+
+    TestBed.configureTestingModule({
+      providers: [
+        AppComponent
+      ]
     });
 
-    describe('INIT', () => {
-        Then(() => {
-            expect(component).toBeTruthy();
-            expect(component.title).toEqual('isolation-session');
-        });
+    componentUnderTest = TestBed.get(AppComponent);
+  });
+
+  When(() => {
+    actualValue = componentUnderTest.getWelcomingMessage(fakeUserName); 
+  });
+
+  describe('user name is Bonnie', () => {
+
+    Given(() => {
+      componentUnderTest.greeting = 'Hola';
+      fakeUserName = 'Bonnie';
     });
+    Then(() => {
+      expectedValue = 'Hola Bonnie';
+      expect(actualValue).toEqual(expectedValue);
+    });
+  });
+
+  describe('user name is Alyssa', () => {
+
+    Given(() => {
+      fakeUserName = 'Alyssa'; 
+    });
+    Then(() => {
+      expectedValue = 'Hello Alyssa';
+      expect(actualValue).toEqual(expectedValue);
+    });
+  });
 });

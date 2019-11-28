@@ -14,7 +14,9 @@ export class FrontComponent implements OnInit {
     constructor(private frontService: FrontService) { }
 
     ngOnInit(): void {
-        this.llamas = this.frontService.getFeaturedLlamas();
+        this.frontService.getFeaturedLlamas().subscribe(result => {
+            this.llamas = result;
+        });
     }
 
     isListVisible(): boolean {

@@ -1,26 +1,39 @@
 import { FrontService } from './front.service';
-import { async, TestBed } from '@angular/core/testing';
+import { async, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { FrontComponent } from './front.component';
+import { createSpyFromClass, Spy } from 'jasmine-auto-spies';
+import { Observable, of } from 'rxjs';
 
 describe('FrontComponent', () => {
     let component: FrontComponent;
+    let frontServiceSpy: Spy<FrontService>;
     let actualValue: any;
 
     Given(async(() => {
         TestBed.configureTestingModule({
-            providers: [FrontComponent, FrontService]
+            providers: [FrontComponent, { provide: FrontService, useValue: createSpyFromClass(FrontService) }]
         });
         component = TestBed.get(FrontComponent);
+        frontServiceSpy = TestBed.get(FrontService);
     }));
 
     describe('INIT', () => {
-        When(() => {
-            component.ngOnInit();
+
+        Given(() => {
+            frontServiceSpy.getFeaturedLlamas.and.returnValue(of([
+                { name: 'llama', img: '1.jpg' }
+            ]));
         });
+
+        When(fakeAsync(() => {
+            component.ngOnInit();
+            tick();
+        }));
         Then(() => {
             expect(component).toBeTruthy();
             expect(component.llamas.length).toBeGreaterThan(0);
+            expect(frontServiceSpy.getFeaturedLlamas).toHaveBeenCalled();
         });
     });
 

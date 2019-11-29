@@ -6,17 +6,25 @@
 
     <ng-container *ngIf="isListVisible()">
         <div
-            class="col-6 col-md-6"
+            class="col-6 col-md-3 mb-3"
             *ngFor="let llama of llamas"
         >
             <div class="llama-thumb">
                 <img
                     class="img-thumbnail"
-                    src="../assets/images/{{llama.img}}"
+                    src="../assets/images/{{llama.image}}"
                     alt="{{llama.name}}"
                 >
             </div>
-            <span>{{ llama.name }}</span>
+            <div
+                style="display: flex; justify-content: space-between; flex-direction: column;">
+                <span>{{ llama.name }}</span>
+                <button
+                    class="btn btn-primary"
+                    (click)="goToLlamaPage(llama.id)"
+                    style="overflow: hidden; word-wrap: none; white-space: nowrap; opacity: .7; padding: 0;"
+                >Go To Page</button>
+            </div>
         </div>
     </ng-container>
 
